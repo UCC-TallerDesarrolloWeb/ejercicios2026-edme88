@@ -1,7 +1,11 @@
-## Ejercicio de Taller de Desarrollo Web
+## :dizzy: Ejercicio de Taller de Desarrollo Web
 
 - Agustina Edme **Aliciardi**
 - David **Azulay**
+
+1. Item 1
+2. Item 2
+3. Item 3
 
 ### Contenido
 Este repositorio contiene ejercicios de practica
