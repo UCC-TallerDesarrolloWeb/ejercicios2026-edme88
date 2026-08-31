@@ -1,0 +1,24 @@
+.main-style{
+    text-align: center;
+    background: linear-gradient(to right, rgba(3, 30, 152, 0.627), rgb(169, 169, 221));
+}
+
+h3{
+    font-family: "Caacupe One", sans-serif;
+    text-shadow: 5px 3px rgb(253, 12, 229);
+}
+
+div{
+    border: 2px solid rgb(10, 107, 218);
+    margin: 15px 20px;
+    padding: 10px 25px 12px;
+    background-color: rgba(0, 68, 255, 0.315);
+    border-radius: 15px 30px 50px 100px;
+    box-shadow: 10px 8px rgb(170, 30, 153);
+}
+
+#user{
+    width: 10%;
+    float: left;
+    border-radius: 50%;
+}
