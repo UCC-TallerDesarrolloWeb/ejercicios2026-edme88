@@ -34,10 +34,10 @@
 -  [x] Incrustado
 -  [X] Estilo con Descendientes
 -  [X] Pseudo Clases
--  [ ] CV
--  [ ] Backgrounds
+-  [X] CV
+-  [x] Backgrounds
 -  [ ] Position
--  [ ] 2 Columnas
+-  [x] 2 Columnas
 -  [ ] Grid
 -  [ ] grid-areas
 -  [ ] Mejora
