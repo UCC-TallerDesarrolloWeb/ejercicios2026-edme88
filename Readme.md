@@ -30,20 +30,20 @@
 -  [x] Multimedia
 
 ### CSS
--  [ ] Propiedades tipográficas
--  [ ] Incrustado
--  [ ] Estilo con Descendientes
--  [ ] Pseudo Clases
--  [ ] CV
--  [ ] Backgrounds
+-  [X] Propiedades tipográficas
+-  [x] Incrustado
+-  [X] Estilo con Descendientes
+-  [X] Pseudo Clases
+-  [X] CV
+-  [x] Backgrounds
 -  [ ] Position
--  [ ] 2 Columnas
--  [ ] Grid
--  [ ] grid-areas
--  [ ] Mejora
--  [ ] Transitions
--  [ ] Viewport
--  [ ] Responsive
+-  [x] 2 Columnas
+-  [x] Grid
+-  [x] grid-areas
+-  [x] Mejora
+-  [x] Transitions
+-  [x] Viewport
+-  [x] Responsive
 
 ## Unidad 3: JavaScript y ES6+
 
