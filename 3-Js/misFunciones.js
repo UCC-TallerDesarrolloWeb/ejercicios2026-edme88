@@ -7,6 +7,8 @@
 convertirUnidades = (id, valor) => {
     let metros, pulgadas, pies, yardas;
 
+    valor = valor.replace(",",".");
+
     if(isNaN(valor)){
         alert("Se ingreso un valor incorrecto: "+id);
         metros = "";
@@ -35,10 +37,10 @@ convertirUnidades = (id, valor) => {
         pies = valor*0.0833333;
     }
 
-    document.getElementById("metro").value = metros;
-    document.getElementById("pulgada").value = pulgadas;
-    document.getElementById("pie").value = pies;
-    document.getElementById("yarda").value = yardas;
+    document.getElementById("metro").value = Math.round(metros*100)/100;
+    document.getElementById("pulgada").value = Math.round(pulgadas*100)/100;
+    document.getElementById("pie").value = pies.toFixed(2);
+    document.getElementById("yarda").value = yardas.toFixed(2);
 }
 
 /**

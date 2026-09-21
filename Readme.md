@@ -55,7 +55,7 @@
 -  [x] Mostrar/Ocultar div
 -  [x] Mostrar/Ocultar Dialog
 -  [ ] Operaciones Matemáticas (tarea)
--  [ ] Conversor de Unidades II
+-  [x] Conversor de Unidades II
 -  [ ] Operaciones Matemáticas II
 -  [ ] Renderizado Dinámico
 -  [ ] Renderizado Dinámico del Dialog
