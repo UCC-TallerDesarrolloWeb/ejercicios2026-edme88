@@ -75,3 +75,14 @@ mostrarOcultar = (valor) => {
     //     document.getElementById("unDiv").style.display = 'none';
     // }
 }
+
+/**
+ * Calcula la suma de 2 valores ingresados por el usuario
+ * @method calcularSuma
+ */
+function calcularSuma(){
+    let sum1, sum2;
+    sum1 = Number(document.getElementById("nums1").value);
+    sum2 = document.getElementById("nums2").value;
+    document.getElementById("totalS").value = sum1 + Number(sum2);
+}
