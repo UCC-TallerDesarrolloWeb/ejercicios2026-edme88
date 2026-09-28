@@ -61,3 +61,229 @@ const productos = [
     imagen: "protectores-pie.webp",
   },
 ];
+
+/**
+ * Mostrar un modal con el detalle del producto
+ * @method mostrarModal
+ * @param {number} num - Id del elemento que se desea visualizar el modal
+ */
+mostrarModal = (num) => {
+  document.getElementById("nombre-producto").innerText = productos[num].nombre;
+  document.getElementById("descripcion-producto").innerText = productos[num].description;
+  document.getElementById("modal").style.display = 'block';
+}
+
+/**
+ * Cerrar un modal con el detalle del producto
+ * @method cerrarModal
+ */
+cerrarModal = () => {
+  document.getElementById("modal").style.display = 'none';
+}
+
+/**
+ * Mostrar el catalogo de productos en la seccion main
+ * @method mostrarCatalogo
+ */
+mostrarCatalogo = (newList = productos) => {
+  let contenido = "";
+
+  newList.forEach((producto, id) => {
+    contenido += `<div>
+                    <img src="https://ucc-tallerdesarrolloweb.github.io/filminas/images/ejercicios/${producto.imagen}" alt="${producto.nombre}">
+                    <h3>${producto.nombre}</h3>
+                    <p>${formatPrice(producto.precio)}</p>
+                    <button type="button" onclick="mostrarModal(${id})">Ver detalle de Producto</button>
+                    <button type="button" onclick="agregarAlCarrito(${id})">Agregar al Carrito</button>
+        
+                  </div>`;
+  });
+
+  document.getElementById("catalogo").innerHTML = contenido;
+}
+
+/**
+ * Agrega a un array en el localstorage los productos seleccionados por el usuario
+ * @method agregarAlCarrito
+ * @param {number} num - id del producto que se desea agregar al carrito
+ */
+agregarAlCarrito = (num) => {
+  let carritoList = localStorage.getItem("carrito");
+  console.log(carritoList);
+
+  if(carritoList==null){
+    carritoList=[];
+  }else{
+    carritoList = JSON.parse(carritoList); 
+  }
+  carritoList.push(num);
+  console.log(carritoList);
+  localStorage.setItem("carrito", JSON.stringify(carritoList));
+  contarProductos();
+}
+
+/**
+ * Muestra dinamicamente los productos que estan en el localstorage
+ * @method mostrarCarrito
+ */
+mostrarCarrito = () => {
+  let carritoList = localStorage.getItem("carrito");
+  console.log(carritoList);
+  let contenido = "";
+
+  if(carritoList==null){
+    contenido = `<div>Su carrito de compras esta vacio</div>`;
+  }else{
+    carritoList = JSON.parse(carritoList);
+    let total = 0;
+    const listProd = [];
+    const listCant = [];
+
+    carritoList.forEach((num) => {
+      if(!listProd.includes(num)){
+        listProd.push(num);
+        listCant.push(1);
+      }else{
+        const inx = listProd.indexOf(num);
+        listCant[inx] +=1;
+      }
+    })
+
+    console.log(carritoList)
+    listProd.forEach((num, id) => {
+      contenido += `<div>
+                      <h3>${productos[num].nombre}</h3>
+                      <p>${formatPrice(productos[num].precio)}</p>
+                      <p>Cantidad: ${listCant[id]}</p>
+                      <button type="button" onclick="eliminarProducto(${id})">Eliminar Producto</button>
+                    </div>`;
+      total += productos[num].precio * listCant[id];
+    });
+
+    contenido += `Total: ${formatPrice(total)}`;
+    contenido += `<button type="button" onclick="vaciarCarrito()">Vaciar Carrito</button>`;
+  }
+
+  document.getElementById("carrito").innerHTML = contenido;
+}
+
+/**
+ * Vacia el carrito de compras eliminando el contenido de localstorage
+ * @method vaciarCarrito
+ */
+let vaciarCarrito = () => {
+  localStorage.removeItem("carrito");
+  window.location.reload();
+}
+
+/**
+ * Elimina un producto puntual del localstorage
+ * @param {number} id - Id del array de localstorage
+ */
+let eliminarProducto = (id) => {
+  let carritoList = localStorage.getItem("carrito");
+  carritoList = JSON.parse(carritoList);
+
+  carritoList.splice(id, 1);
+
+  if(carritoList.length > 0){
+    localStorage.setItem("carrito", JSON.stringify(carritoList));
+  }else{
+    localStorage.removeItem("carrito");
+  }
+  
+  window.location.reload();
+}
+
+/**
+ * Filtra el catalogo de productos segun los valores ingresados por el usuario
+ */
+let filtrarProductos = () => {
+  let searchWord = document.getElementById("search").value;
+  let min = document.getElementById("price-min").value;
+  let max = document.getElementById("price-max").value;
+  let marca = document.getElementById("marca").value;
+  let prot = document.getElementById("protectores").checked;
+  let entr = document.getElementById("entrenamiento").checked;
+  let dob = document.getElementById("dobok").checked;
+  let newLista = productos;
+
+  if(searchWord){
+    newLista = newLista.filter((prod) => prod.nombre.toLowerCase().includes(searchWord.toLowerCase()));
+  }
+
+  if(min){
+    newLista = newLista.filter((prod) => prod.precio >= min)
+  }
+
+  if(max){
+    newLista = newLista.filter((prod) => prod.precio <= max)
+  }
+
+  if(marca != "Todas"){
+    newLista = newLista.filter((prod) => prod.marca == marca)
+  }
+
+  let category = [];
+  prot ? category.push("Protectores") : "";
+  entr ? category.push("Entrenamiento"): "";
+  dob ? category.push("Dobok"): "";
+
+  if(category.length >0){
+    newLista = newLista.filter((prod) => category.includes(prod.categoria))
+  }
+
+  mostrarCatalogo(newLista);
+}
+
+/**
+ * Formatea el precio $ 35.000,55
+ * @param {number} price 
+ * @returns {number} con formato 
+ */
+let formatPrice = (price) => {
+  return new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS"
+  }).format(price);
+}
+
+let contarProductos = () => {
+  let carritoList = localStorage.getItem("carrito");
+  carritoList = JSON.parse(carritoList);
+
+  if(carritoList.length > 0){
+    document.getElementById("cant-prod").innerText = carritoList.length;
+  }
+}
+
+let ordenarCatalogo = () => {
+  const opt = document.getElementById("order").value;
+  let newProductos;
+
+  switch(opt){
+    case "menor":
+        newProductos = productos.sort((a,b) => a.precio - b.precio);
+      break;
+    case "mayor":
+        newProductos = productos.sort((a,b) => b.precio - a.precio);
+      break;
+    case "a-z":
+        newProductos = productos.sort((a,b) => {
+          if(a.nombre.toLowerCase() < b.nombre.toLowerCase()){
+            return -1;
+          }else{return 1}
+        })
+      break;
+    case "z-a":
+        newProductos = productos.sort((a,b) => {
+          if(a.nombre.toLowerCase() > b.nombre.toLowerCase()){
+            return -1;
+          }else{return 1}
+        })
+      break;
+    default:
+      newProductos = productos;
+  }
+  mostrarCatalogo(newProductos);
+}
