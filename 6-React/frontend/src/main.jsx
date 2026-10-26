@@ -5,14 +5,18 @@ import './index.css'
 import Login from './Login.jsx'
 import App from './App.jsx'
 import Activities from './Activities.jsx';
+import Layout from './Layout.jsx';
+import Home from './Home.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="login" element={<Login />} />
-        <Route path="actividades" element={<Activities />} />
+        <Route path='/' element={ <Layout />}>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="actividades" element={<Activities />} />
+        </Route>
       </Routes>
     </BrowserRouter>,
   </StrictMode>,
