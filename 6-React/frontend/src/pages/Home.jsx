@@ -1,5 +1,5 @@
 import "@styles/Home.scss";
-import funcionalImg from '@assets/home/funcional.jpg';
+import funcionalImg from '../assets/home/funcional.jpg';
 import zumbaImg from '@assets/home/zumba.jpg';
 
 
